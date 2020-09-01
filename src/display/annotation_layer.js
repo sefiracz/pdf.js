@@ -44,6 +44,7 @@ class AnnotationElementFactory {
    */
   static create(parameters) {
     const subtype = parameters.data.annotationType;
+    console.log(parameters);
 
     switch (subtype) {
       case AnnotationType.LINK:
@@ -67,6 +68,8 @@ class AnnotationElementFactory {
             return new PushButtonWidgetAnnotationElement(parameters);
           case 'Ch':
             return new ChoiceWidgetAnnotationElement(parameters);
+          case 'Sig' :
+            return new SignatureWidgetAnnotationElement(parameters);
         }
         return new WidgetAnnotationElement(parameters);
 
@@ -613,6 +616,25 @@ class ChoiceWidgetAnnotationElement extends WidgetAnnotationElement {
     }
 
     this.container.appendChild(selectElement);
+    return this.container;
+  }
+}
+
+class SignatureWidgetAnnotationElement extends AnnotationElement {
+  constructor(parameters) {
+    const isRenderable = true;
+    super(parameters, isRenderable);
+  }
+
+  /**
+   * Render the signature annotation's HTML element in the empty container.
+   *
+   * @public
+   * @memberof SignatureWidgetAnnotationElement
+   * @returns {HTMLSectionElement}
+   */
+  render() {
+    this.container.className = 'signatureAnnotation';
     return this.container;
   }
 }
