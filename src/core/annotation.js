@@ -84,6 +84,8 @@ class AnnotationFactory {
             return new ButtonWidgetAnnotation(parameters);
           case 'Ch':
             return new ChoiceWidgetAnnotation(parameters);
+          case 'Sig' :
+            return new SignatureWidgetAnnotation(parameters);
         }
         warn('Unimplemented widget field type "' + fieldType + '", ' +
              'falling back to base field type.');
@@ -771,6 +773,7 @@ class WidgetAnnotation extends Annotation {
     //   data.fieldValue = null;
     //   this.setFlags(AnnotationFlag.HIDDEN);
     // }
+    console.log(this);
   }
 
   /**
@@ -1030,6 +1033,13 @@ class ChoiceWidgetAnnotation extends WidgetAnnotation {
     // Process field flags for the display layer.
     this.data.combo = this.hasFieldFlag(AnnotationFieldFlag.COMBO);
     this.data.multiSelect = this.hasFieldFlag(AnnotationFieldFlag.MULTISELECT);
+  }
+}
+
+class SignatureWidgetAnnotation extends WidgetAnnotation {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(params) {
+    super(params);
   }
 }
 
